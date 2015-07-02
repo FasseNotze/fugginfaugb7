@@ -1,22 +1,51 @@
 package de.hrw.swep.biblio.service;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.util.Set;
+
+import org.junit.Before;
 import org.junit.Test;
+
+import de.hrw.swep.biblio.persistence.DAO;
+import de.hrw.swep.biblio.service.benutzer.Benutzer;
+import de.hrw.swep.biblio.service.gegenstaende.Buch;
 
 /**
  * Testet die Bibliotheksklasse mit der echten Datenbank.
+ * 
  * @author M. Friedrich
  *
  */
 public class BibliothekIntegrationsTest {
+
+	Bibliothek bib;
+	DAO dao;
+
+	/**
+	 * Setup
+	 */
+	@Before
+	public void setup() {
+		bib = new Bibliothek();
+		dao = new DAO();
+		bib.setDb(dao);
+	}
 
 	/**
 	 * Testet, ob ein Buch fuer einen gegebenen Titel gefunden wird.
 	 */
 	@Test
 	public void testSucheBuchNachTitel() {
-		fail("Not yet implemented");
+		Set<Buch> bookset = bib.sucheBuchNachTitel("Klatsch");
+		assertEquals(1, bookset.size());
+		for (Buch b : bookset) {
+			assertEquals("Klatsch", b.getTitel());
+			assertEquals("Malte Mohn", b.getAutor());
+			assertEquals("de.hrw.swep.biblio.service.gegenstaende.Ausgeliehen",
+					b.getState().getClass().getName());
+		}
 	}
 
 	/**
@@ -24,7 +53,14 @@ public class BibliothekIntegrationsTest {
 	 */
 	@Test
 	public void testSucheBuchNachAutor() {
-		fail("Not yet implemented");
+		Set<Buch> bookset = bib.sucheBuchNachAutor("Malte Mohn");
+		assertEquals(1, bookset.size());
+		for (Buch b : bookset) {
+			assertEquals("Klatsch", b.getTitel());
+			assertEquals("Malte Mohn", b.getAutor());
+			assertEquals("de.hrw.swep.biblio.service.gegenstaende.Ausgeliehen", b
+					.getState().getClass().getName());
+		}
 	}
 
 	/**
@@ -32,7 +68,13 @@ public class BibliothekIntegrationsTest {
 	 */
 	@Test
 	public void testSucheBenutzerNachName() {
-		fail("Not yet implemented");
+		Set<Benutzer> bset = bib.sucheBenutzerNachName("Adalbert Alt");
+		assertEquals(1, bset.size());
+		for (Benutzer b : bset) {
+			assertEquals(1, b.getId());
+			assertEquals("de.hrw.swep.biblio.service.benutzer.Normal", b
+					.getStatus().getClass().getName());
+		}
 	}
 
 	/**
@@ -40,7 +82,9 @@ public class BibliothekIntegrationsTest {
 	 */
 	@Test
 	public void testSucheBenutzerNachId() {
-		fail("Not yet implemented");
+		Benutzer b = bib.sucheBenutzerNachId(1);
+		assertEquals("Adalbert Alt", b.getName());
+		assertEquals("de.hrw.swep.biblio.service.benutzer.Normal", b
+				.getStatus().getClass().getName());
 	}
-
 }
