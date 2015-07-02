@@ -20,7 +20,7 @@ public class Normal implements Benutzerstatus {
 	}
 
 	public void freischalten() {
-		// TODO Statusübergang
+		throw new IllegalStateTransition();
 	}
 
 }

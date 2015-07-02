@@ -25,7 +25,7 @@ public class BenutzerStatusTest {
 		b.setStatus(new Normal(b));
 		
 		b.mahnen(new Gebuehr("Testgebühr", 100));
-		assertEquals("de.hrw.swep.bliblio.service.benutzer.Gesperrt", b.getStatus().getClass().getName());
+		assertEquals("de.hrw.swep.biblio.service.benutzer.Gesperrt", b.getStatus().getClass().getName());
 	}
 
 	/** 
@@ -38,7 +38,7 @@ public class BenutzerStatusTest {
 		b.setStatus(new Gesperrt(b));
 		
 		b.freischalten();
-		assertEquals("de.hrw.swep.bliblio.service.benutzer.Normal", b.getStatus().getClass().getName());
+		assertEquals("de.hrw.swep.biblio.service.benutzer.Normal", b.getStatus().getClass().getName());
 	}
 	
 	/** 
