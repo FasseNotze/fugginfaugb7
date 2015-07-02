@@ -24,6 +24,6 @@ public class Frei implements Ausleihstatus {
 	}
 
 	public void verloren() {
-		// TODO Statusübergang
+		this.gegenstand.setState(new Verloren(gegenstand));
 	}
 }
