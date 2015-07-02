@@ -1,6 +1,7 @@
 package de.hrw.swep.biblio.service.benutzer;
 
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
